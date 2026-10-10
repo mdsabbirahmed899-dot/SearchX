@@ -65,3 +65,5 @@ document.querySelectorAll(".quick-btn").forEach(function (button) {
 if (window.matchMedia("(min-width: 768px)").matches) {
   searchInput.focus();
   }
+
+console.log("SearchX Live Update Test 123");
