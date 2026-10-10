@@ -31,16 +31,40 @@ jobs:
       - name: Install dependencies
         run: npm install --no-save @capgo/capacitor-updater@8.52.1 esbuild
 
-      - name: Prepare bundle
+      - name: Prepare SearchX bundle
         run: |
           mkdir -p dist
           cp index.html style.css dist/
+
           {
             printf "import { CapacitorUpdater } from '@capgo/capacitor-updater';\n"
             printf "CapacitorUpdater.notifyAppReady();\n\n"
             cat app.js
           } > entry.js
+
           npx esbuild entry.js --bundle --platform=browser --format=iife --outfile=dist/app.js
+
+      - name: Create Capacitor config
+        run: |
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.exampile.myfristapp",
+            "appName": "SearchX",
+            "webDir": "dist",
+            "plugins": {
+              "CapacitorUpdater": {
+                "appId": "com.exampile.myfristapp",
+                "version": "0.0.0",
+                "defaultChannel": "production",
+                "autoUpdate": "always",
+                "autoSplashscreen": true
+              },
+              "SplashScreen": {
+                "launchAutoHide": false
+              }
+            }
+          }
+          EOF
 
       - name: Upload to Capgo
         env:
@@ -50,5 +74,6 @@ jobs:
             com.exampile.myfristapp \
             --path ./dist \
             --channel production \
-            --apikey "$CAPGO_API_KEY"
+            --apikey "$CAPGO_API_KEY" \
+            --auto-bump patch
             
