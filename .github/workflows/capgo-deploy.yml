@@ -1,1 +1,54 @@
 
+name: Deploy SearchX to Capgo
+
+'on':
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "style.css"
+      - "app.js"
+      - ".github/workflows/capgo-deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-save @capgo/capacitor-updater@8.52.1 esbuild
+
+      - name: Prepare bundle
+        run: |
+          mkdir -p dist
+          cp index.html style.css dist/
+          {
+            printf "import { CapacitorUpdater } from '@capgo/capacitor-updater';\n"
+            printf "CapacitorUpdater.notifyAppReady();\n\n"
+            cat app.js
+          } > entry.js
+          npx esbuild entry.js --bundle --platform=browser --format=iife --outfile=dist/app.js
+
+      - name: Upload to Capgo
+        env:
+          CAPGO_API_KEY: ${{ secrets.CAPGO_API_KEY }}
+        run: |
+          npx @capgo/cli@latest bundle upload \
+            com.exampile.myfristapp \
+            --path ./dist \
+            --channel production \
+            --apikey "$CAPGO_API_KEY"
+            
