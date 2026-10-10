@@ -1,1 +1,122 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="SearchX - Search the web quickly using your favorite search engine.">
+  <title>SearchX - Smart Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="SearchX Home">
+      <span class="brand-icon">S</span>
+      <span>Search<span class="brand-accent">X</span></span>
+    </a>
+    <span class="top-label">SMART SEARCH</span>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="status-dot"></span>
+        YOUR WEB, YOUR WAY
+      </div>
+
+      <h1>Explore the <span>Internet.</span></h1>
+      <p class="subtitle">
+        এক জায়গা থেকেই খুঁজুন আপনার প্রয়োজনীয় সবকিছু।
+      </p>
+
+      <form id="searchForm" class="search-form">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor" stroke-width="1.8"/>
+              <path d="m16 16 4.5 4.5"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round"/>
+            </svg>
+          </span>
+
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="কী খুঁজতে চান?"
+            autocomplete="off"
+            aria-label="সার্চ লিখুন"
+            required
+          >
+
+          <button type="button" id="clearBtn"
+            class="clear-btn" aria-label="লেখা মুছুন"
+            hidden>×</button>
+        </div>
+
+        <div class="search-options">
+          <label for="engineSelect">Search with</label>
+          <select id="engineSelect" aria-label="সার্চ ইঞ্জিন">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+            <option value="youtube">YouTube</option>
+          </select>
+
+          <button type="submit" class="search-btn">
+            Search <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="quick-section">
+        <p class="section-label">QUICK SEARCH</p>
+        <div class="quick-links">
+          <button type="button" class="quick-btn" data-query="Technology">
+            <span>⌘</span> Technology
+          </button>
+          <button type="button" class="quick-btn" data-query="Education">
+            <span>▤</span> Education
+          </button>
+          <button type="button" class="quick-btn" data-query="News">
+            <span>◉</span> News
+          </button>
+          <button type="button" class="quick-btn" data-query="Programming">
+            <span>&lt;/&gt;</span> Coding
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <article class="feature-card">
+        <div class="feature-icon purple">⌕</div>
+        <h2>Simple Search</h2>
+        <p>সহজেই খুঁজুন প্রয়োজনীয় তথ্য।</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon blue">↗</div>
+        <h2>Multiple Engines</h2>
+        <p>পছন্দের সার্চ ইঞ্জিন বেছে নিন।</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon green">▣</div>
+        <h2>Mobile Friendly</h2>
+        <p>মোবাইল ও কম্পিউটারে ব্যবহারযোগ্য।</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><span class="footer-brand">SearchX</span> · Search smarter, explore more.</p>
+    <p class="footer-note">Powered by your favorite search engines</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
